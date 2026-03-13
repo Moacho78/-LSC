@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Detector Avanzado Rasgos LSC</title>
+
+<link rel="stylesheet" href="styles.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/holistic/holistic.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+
+</head>
+
+<body>
+
+<div id="container">
+  <video class="input_video" autoplay playsinline></video>
+  <canvas class="output_canvas"></canvas>
+</div>
+
+<div id="panel">
+  <h2>Rasgos Detectados</h2>
+  <div id="results"></div>
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>
