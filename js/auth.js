@@ -27,7 +27,7 @@ toggleLink.addEventListener("click", (e) => {
 });
 
 /* 🚀 ACCIÓN PRINCIPAL */
-mainBtn.addEventListener("click", () => {
+mainBtn.addEventListener("click", async () => {
 
     const email = emailInput.value;
     const password = passwordInput.value;
@@ -38,28 +38,38 @@ mainBtn.addEventListener("click", () => {
     }
 
     if (isLogin) {
-        const user = JSON.parse(localStorage.getItem("user"));
+        try {
+            const response = await fetch("http://localhost:3000/api/usuarios/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8"
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                })
+            });
 
-        if (!user) {
-            alert("No hay usuarios registrados");
-            return;
-        }
+            const data = await response.json();
 
-        if (email === user.email && password === user.password) {
+            if (!response.ok) {
+                alert(data.message || "Error en el login");
+                return;
+            }
 
-            // 🔥 GUARDAR SESIÓN
-            localStorage.setItem("session", JSON.stringify({
-                email: user.email
-            }));
+            // 🔥 GUARDAR SESIÓN 
+            localStorage.setItem("session", JSON.stringify(data));
 
             alert("Login exitoso");
             window.location.href = "camera.html";
 
-        } else {
-            alert("Credenciales incorrectas");
+        } catch (error) {
+            console.error(error);
+            alert("Error al conectar con el servidor");
         }
 
     } else {
+        // REGISTRO (puedes luego también hacerlo con fetch si tienes endpoint)
         const user = { email, password };
         localStorage.setItem("user", JSON.stringify(user));
 

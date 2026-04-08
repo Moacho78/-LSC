@@ -7,7 +7,7 @@ window.addEventListener("DOMContentLoaded", () => {
         nav.innerHTML = `
             <a href="index.html">Inicio</a>
             <a href="camera.html">Cámara</a>
-            <span style="margin-left:20px;">👤 ${session.email}</span>
+            <span style="margin-left:20px;">👤 ${session.usuario.nombre}</span>
             <button id="logoutBtn" class="btn-nav">Salir</button>
         `;
 
