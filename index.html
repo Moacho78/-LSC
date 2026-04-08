@@ -2,29 +2,56 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Detector Avanzado Rasgos LSC</title>
-
-<link rel="stylesheet" href="styles.css">
-
-<script src="https://cdn.jsdelivr.net/npm/@mediapipe/holistic/holistic.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
-
+<title>Feelitg</title>
+<link rel="stylesheet" href="styles/styles.css">
+<link rel="stylesheet" href="styles/home.css">
 </head>
 
 <body>
 
-<div id="container">
-  <video class="input_video" autoplay playsinline></video>
-  <canvas class="output_canvas"></canvas>
-</div>
+<header class="navbar">
+    <div class="logo">🤟 Feelitg</div>
+    <nav>
+        <a href="#">Inicio</a>
+        <a href="camera.html">Cámara</a>
+        <a href="login.html" class="btn-nav">Entrar</a>
+    </nav>
+</header>
 
-<div id="panel">
-  <h2>Rasgos Detectados</h2>
-  <div id="results"></div>
-</div>
+<section class="hero">
 
-<script src="app.js"></script>
+    <div class="hero-text">
+        <h1>Lengua de Señas Colombiana</h1>
+        <p>
+            Aprende, interpreta y comunícate en tiempo real usando inteligencia artificial.
+        </p>
+        <a href="camera.html" class="btn-main">Comenzar</a>
+    </div>
 
+    <div class="hero-img">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+    </div>
+
+</section>
+
+<section class="features">
+
+    <div class="feature">
+        <h3>📷 Detección en vivo</h3>
+        <p>Reconocimiento en tiempo real con tu cámara</p>
+    </div>
+
+    <div class="feature">
+        <h3>🧠 IA avanzada</h3>
+        <p>Procesamiento inteligente de señas</p>
+    </div>
+
+    <div class="feature">
+        <h3>🌍 Inclusión</h3>
+        <p>Conecta con la comunidad sorda</p>
+    </div>
+
+</section>
+<script src="js/navbar.js"></script>
 </body>
 </html>

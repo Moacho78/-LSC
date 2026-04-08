@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Analisis LSC</title>
+
+<link rel="stylesheet" href="styles/styles.css">
+<link rel="stylesheet" href="styles/camera.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/holistic/holistic.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+
+</head>
+
+<body>
+
+<header class="navbar">
+    <div class="logo">🤟 Feelitg</div>
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="camera.html">Cámara</a>
+        <a href="login.html" class="btn-nav">Entrar</a>
+    </nav>
+</header>
+
+<header class="topbar">
+  <h2>Analisis de parametros Lengua de Señas Colombiana (LSC)</h2>
+</header>
+
+<div class="main">
+
+  <div class="left">
+
+    <div class="camera-card">
+      <video class="input_video" autoplay playsinline></video>
+      <canvas class="output_canvas"></canvas>
+    </div>
+
+    <div class="buttons">
+      <button id="btnCamara" class="btn">Activar cámara</button>
+      <button id="btnAnalisis" class="btn secondary" disabled>Iniciar análisis</button>
+    </div>
+
+  </div>
+
+  <div class="right">
+
+    <div class="card">
+      <h3>Resultado de la seña</h3>
+      <div id="resultado"></div>
+    </div>
+
+    <div class="card">
+      <h3>Posibles señas</h3>
+      <div id="posibles"></div>
+    </div>
+
+    <div class="card">
+      <h3>Parámetros manuales identificados</h3>
+      <div id="manuales"></div>
+    </div>
+
+    <div class="card">
+      <h3>Parámetros no manuales identificados</h3>
+      <div id="no-manuales"></div>
+    </div>
+
+  </div>
+
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/navbar.js"></script>
+</body>
+</html>
