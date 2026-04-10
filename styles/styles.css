@@ -31,7 +31,9 @@ body {
     margin-left: 20px;
     text-decoration: none;
 }
-
+nav{
+    margin-right: 100px;
+}
 .btn-nav {
     background: #FFD600;
     color: black !important;
