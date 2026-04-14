@@ -10,7 +10,7 @@
 <body class="login-body">
 
 <header class="navbar">
-    <div class="logo">🤟 Feelitg</div>
+    <div class="logo">🤟 Semak</div>
     <nav>
         <a href="index.html">Inicio</a>
         <a href="camera.html">Cámara</a>
@@ -19,16 +19,32 @@
 </header>
 
 <div class="login-container">
-    <div class="login-image">
-        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
-    </div>
+
     <div class="login-card">
 
-        <h2 id="title">🤟 Feelitg</h2>
+        <img src="img/logo.png" id="logo" alt="Semak Logo">
+
         <p id="subtitle">Inicio de sesión</p>
 
-        <input type="email" id="email" placeholder="Correo">
-        <input type="password" id="password" placeholder="Contraseña">
+        <div class="form-group" id="nameGroup" style="display:none;">
+            <label>Nombre</label>
+            <input type="text" id="name" placeholder="Tu nombre">
+        </div>
+
+        <div class="form-group" id="deptGroup" style="display:none;">
+            <label>Departamento</label>
+            <input type="text" id="department" placeholder="Tu departamento">
+        </div>
+
+        <div class="form-group">
+            <label>Correo</label>
+            <input type="email" id="email" placeholder="correo@email.com">
+        </div>
+
+        <div class="form-group">
+            <label>Contraseña</label>
+            <input type="password" id="password" placeholder="••••••••">
+        </div>
 
         <button class="btn-main" id="mainBtn">Ingresar</button>
 
@@ -38,7 +54,6 @@
         </span>
 
     </div>
-
 </div>
 
 <script src="js/auth.js"></script>

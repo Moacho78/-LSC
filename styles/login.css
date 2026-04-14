@@ -1,4 +1,3 @@
-/* BODY */
 .login-body {
     margin: 0;
     height: 100vh;
@@ -7,50 +6,130 @@
     background: linear-gradient(135deg, #1E88E5, #0D47A1);
 }
 
-/* CONTENEDOR PRINCIPAL */
 .login-container {
     flex: 1;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 80px;
     padding: 60px;
     margin-top: 80px;
 }
 
-/* 🔥 IMAGEN IZQUIERDA */
-.login-image {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-}
-
-.login-image img {
-    width: 350px;
-    max-width: 100%;
-}
-
-/* FORMULARIO DERECHA */
 .login-card {
     flex: 1;
-    max-width: 350px;
-    background: #e0e0e0;
-    padding: 30px;
-    border-radius: 12px;
+    max-width: 380px;
+    padding: 40px 30px;
+    border-radius: 20px;
+
+    background: #f9f9f9;
+
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+
+    animation: fadeInUp 0.8s ease;
 }
 
-/* INPUTS */
+#logo {
+    width: 140px;
+    margin-bottom: 10px;
+}
+
+/* TITULO */
+#subtitle {
+    font-size: 20px;
+    font-weight: bold;
+    color: #000;
+}
+
+/* FORM */
+.form-group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+/* LABEL */
+.form-group label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    align-self: flex-start;
+}
+
+/* INPUT */
 .login-card input {
     width: 100%;
-    margin: 10px 0;
-    padding: 10px;
+    max-width: 320px;
+    padding: 14px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    outline: none;
+
+    transition: all 0.3s ease;
 }
 
-/* BOTÓN */
-.login-card .btn-main {
+/* FOCUS PRO */
+.login-card input:focus {
+    border-color: #FFD600;
+    box-shadow: 0 0 0 3px rgba(255,214,0,0.4);
+    transform: scale(1.02);
+}
+
+/* BOTON */
+.btn-main {
     width: 100%;
+    max-width: 320px;
+    background: #FFD600;
+    color: black;
+    border: none;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+
+    transition: all 0.3s ease;
 }
 
-/* TEXTO */
+.btn-main:hover {
+    transform: scale(1.06);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* TEXTO INFERIOR */
 .small {
+    margin-top: 10px;
+    color: #333;
     font-size: 14px;
+}
+
+.small a {
+    color: #FFD600;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* ANIMACIONES */
+.fade {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
