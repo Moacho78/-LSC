@@ -3,19 +3,23 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
+
     background: linear-gradient(135deg, #1E88E5, #0D47A1);
 }
 
+/* CONTENEDOR */
 .login-container {
     flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 80px;
     padding: 60px;
     margin-top: 80px;
+    position: relative;
+    z-index: 1;
 }
 
+/* CARD */
 .login-card {
     flex: 1;
     max-width: 380px;
@@ -35,6 +39,7 @@
     animation: fadeInUp 0.8s ease;
 }
 
+/* LOGO */
 #logo {
     width: 140px;
     margin-bottom: 10px;
@@ -47,7 +52,7 @@
     color: #000;
 }
 
-/* FORM */
+/* FORM GROUP */
 .form-group {
     width: 100%;
     display: flex;
@@ -69,15 +74,48 @@
     width: 100%;
     max-width: 320px;
     padding: 14px;
+
     border-radius: 10px;
     border: 1px solid #ccc;
     outline: none;
 
+    box-sizing: border-box;
+
     transition: all 0.3s ease;
 }
 
-/* FOCUS PRO */
-.login-card input:focus {
+/* SELECT IGUAL A INPUT */
+.login-card select {
+    width: 100%;
+    max-width: 320px;
+    padding: 14px;
+
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    outline: none;
+
+    font-size: 14px;
+    font-family: inherit;
+
+    background-color: #fff;
+
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    box-sizing: border-box;
+
+    transition: all 0.3s ease;
+
+    background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px;
+}
+
+/* FOCUS INPUT Y SELECT */
+.login-card input:focus,
+.login-card select:focus {
     border-color: #FFD600;
     box-shadow: 0 0 0 3px rgba(255,214,0,0.4);
     transform: scale(1.02);
@@ -117,12 +155,7 @@
     text-decoration: none;
 }
 
-/* ANIMACIONES */
-.fade {
-    opacity: 0;
-    transform: translateY(20px) scale(0.95);
-}
-
+/* ANIMACION */
 @keyframes fadeInUp {
     from {
         opacity: 0;
