@@ -109,9 +109,10 @@ mainBtn.addEventListener("click", async () => {
             });
 
             const data = await response.json();
+            console.log(data); 
 
             if (!response.ok) {
-                alert(data.message || "Error al registrar usuario");
+                alert(data.msg);
                 return;
             }
 
