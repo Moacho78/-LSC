@@ -10,6 +10,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/usuarios", require("./routes/usuarioRoutes"));
+app.use("/api/palabra",require("./routes/palabraRoutes"));
 
 // ✅ Llamar la función directamente
 connectDB();
