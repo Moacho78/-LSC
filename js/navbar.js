@@ -7,16 +7,24 @@ window.addEventListener("DOMContentLoaded", () => {
             <a href="index.html">Inicio</a>
             <a href="camera.html">Cámara</a>
             <a href="practice.html">Prácticas</a>
-            <span style="margin-left:20px;">👤 ${session.usuario.nombre}</span>
-            <button id="logoutBtn" class="btn-nav">Salir</button>
+
+            <div class="nav-user-group">
+                <span class="user-link">${session.usuario.nombre}</span>
+
+                <button id="logoutBtn" class="logout-btn">
+                    <img src="img/logout.png" alt="Salir">
+                </button>
+            </div>
         `;
 
-        document.getElementById("logoutBtn").addEventListener("click", () => {
+        document.getElementById("logoutBtn").addEventListener("click", (e) => {
+            e.preventDefault();
             localStorage.removeItem("session");
             window.location.href = "login.html";
         });
     }
-    //Mantener Activo la pagina en la que se esta presente
+
+    // 🔥 LINK ACTIVO
     const currentPage = window.location.pathname.split("/").pop();
 
     document.querySelectorAll(".navbar a").forEach(link => {

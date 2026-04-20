@@ -3,27 +3,64 @@
 <head>
 <meta charset="UTF-8">
 <title>Semak</title>
-<link rel="icon" href="img/Semak_Logotipo.png" type="image/png">
+
 <link rel="stylesheet" href="styles/styles.css">
+<link rel="stylesheet" href="styles/practice.css">
 </head>
 <body>
 
 <header class="navbar">
     <div class="logo">
-        <img src="img/Semak_Logotipo_Headerpng.png" alt="Semak Logo">
+        <img src="img/Semak_Logotipo_Headerpng.png">
     </div>
-    <nav>
-        <a href="index.html">Inicio</a>
-        <a href="camera.html">Cámara</a>
-        <a href="practice.html">Prácticas</a>
-        <a href="login.html">Acceso</a>
-    </nav>
+    <nav></nav>
 </header>
 
-<div style="margin-top:100px; text-align:center;">
-    <h1>Prácticas</h1>
+<div class="practice-container">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <div class="timeline">
+            <div class="item active">
+                <div class="circle"></div>
+                <div class="content" onclick="loadVideo(1)">Video 1</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTENIDO -->
+    <div class="main-content">
+
+        <div class="video-container" id="videoContainer">
+            <p style="opacity:0.7;">Selecciona un video para comenzar</p>
+        </div>
+
+        <div class="action-bar">
+            <!-- 🔥 CAMBIO: quitar onclick -->
+            <button class="btn-primary" id="openQuiz">
+                Responder preguntas
+            </button>
+
+            <div id="scoreDisplay" class="score-box">
+                Resultado: 0/5
+            </div>
+        </div>
+
+    </div>
 </div>
 
+<!-- MODAL -->
+<div class="modal" id="questionModal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">✖</span>
+        <h2>Preguntas</h2>
+        <form id="quizForm"></form>
+    </div>
+</div>
+
+<!-- 🔥 IMPORTANTE: scripts al final -->
 <script src="js/navbar.js"></script>
+<script src="js/practice.js"></script>
+
 </body>
 </html>

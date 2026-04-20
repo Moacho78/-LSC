@@ -1,0 +1,274 @@
+/* CONTENEDOR PRINCIPAL */
+.practice-container {
+    display: flex;
+    margin-top: 115px;
+    height: calc(100vh - 115px);
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 260px;
+    background: #f5f5f5;
+    padding: 20px;
+
+    height: 100%;
+    box-sizing: border-box;
+}
+
+/* TIMELINE */
+.timeline {
+    position: relative;
+}
+
+.timeline::before {
+    content: "";
+    position: absolute;
+    left: 10px;
+    width: 2px;
+    height: 100%;
+    background: #ccc;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+
+.circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #ccc;
+    margin-right: 15px;
+}
+
+.item.active .circle { background: #FFD600; }
+
+/* MAIN */
+.main-content {
+    flex: 1;
+    padding: 30px 40px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* VIDEO */
+.video-container {
+    width: 100%;
+    max-width: 900px;
+    height: 450px;
+
+    background: #000;
+    border-radius: 15px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: white;
+}
+
+/* ACTION BAR */
+.action-bar {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* BOTÓN */
+.btn-primary {
+    background: #FFD600;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* SCORE */
+.score-box {
+    background: #fff;
+    padding: 10px 18px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+/* 🔥 FONDO MODAL */
+.modal {
+    display: none;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(6px);
+
+    z-index: 9999;
+}
+
+/* 🔥 CAJA MODAL */
+.modal-content {
+    background: #f4f4f4;
+    width: 500px;
+    max-width: 90%;
+
+    padding: 25px 30px;
+    border-radius: 20px;
+
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+
+    animation: modalFade 0.3s ease;
+}
+
+/* HEADER */
+.modal-content h2 {
+    text-align: center;
+    color: #1a4fa3;
+    margin-bottom: 20px;
+}
+
+/* BOTÓN CERRAR */
+.close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+
+    font-size: 22px;
+    cursor: pointer;
+    color: #888;
+}
+
+.close:hover {
+    color: #000;
+}
+
+/* 🔥 PREGUNTAS (CARDS) */
+.question {
+    margin-bottom: 20px;
+}
+
+.question p {
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+/* OPCIONES */
+.question label {
+    display: block;
+    background: #e9e9e9;
+    padding: 12px 15px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+/* HOVER OPCIONES */
+.question label:hover {
+    background: #ddd;
+}
+
+/* RADIO */
+.question input {
+    margin-right: 10px;
+}
+
+/* 🔥 BOTONES */
+.modal-buttons {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* BOTÓN GENERAL */
+.modal-buttons button {
+    border: none;
+    padding: 10px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+/* CONTINUAR */
+.modal-buttons button:last-child {
+    background: #FFD600;
+    width: 100%;
+}
+
+/* ATRÁS */
+.modal-buttons button:first-child {
+    background: #ddd;
+}
+
+/* 🔥 RESUMEN CARDS */
+#quizForm p {
+    background: #e9e9e9;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+}
+
+/* BOTÓN CONFIRMAR FINAL */
+#quizForm button {
+    background: #FFD600;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* 🔥 ANIMACIONES */
+@keyframes modalFade {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* SLIDE ENTRE PREGUNTAS */
+.fade-slide {
+    animation: slideIn 0.3s ease;
+}
+
+.fade-slide-back {
+    animation: slideBack 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideBack {
+    from {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}

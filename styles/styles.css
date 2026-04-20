@@ -4,12 +4,14 @@ body {
     font-family: 'Segoe UI', sans-serif;
 }
 
-/* 🔥 NAVBAR GLOBAL FIJO */
+/* 🔥 NAVBAR */
 .navbar {
     position: fixed;
     top: 0;
     left: 0;
-    width: 97%;
+    width: 100%; /* 🔥 FIX */
+    box-sizing: border-box;
+
     z-index: 1000;
 
     display: flex;
@@ -20,11 +22,17 @@ body {
     background: #0D47A1;
     color: white;
 }
-.navbar nav{
+
+/* NAV */
+.navbar nav {
     margin-right: 150px;
+
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap; /* 🔥 clave */
 }
 
-/* LOGO AJUSTADO */
+/* LOGO */
 .navbar .logo img {
     height: 80px;
     width: auto;
@@ -37,6 +45,8 @@ body {
     text-decoration: none;
     font-weight: 500;
     transition: 0.3s;
+
+    white-space: nowrap; /* 🔥 evita salto */
 }
 
 /* HOVER */
@@ -51,22 +61,40 @@ body {
     padding-bottom: 3px;
 }
 
-/* 🔥 BOTONES BASE */
-.btn-main {
-    background: #FFD600;
+/* 🔥 GRUPO USUARIO */
+.nav-user-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 25px;
+    white-space: nowrap;
+}
+
+/* USUARIO */
+.user-link {
+    font-weight: 500;
+    color: white;
+}
+
+/* LOGOUT */
+.logout-btn {
+    background: transparent;
     border: none;
-    padding: 12px 25px;
     cursor: pointer;
-    border-radius: 8px;
-    font-weight: bold;
-    color: black;
+    display: flex;
+    align-items: center;
+}
+
+/* ICONO */
+.logout-btn img {
+    width: 20px;
+    height: 20px;
     transition: 0.3s;
+    filter: brightness(0) invert(1);
 }
 
-.btn-main:hover {
-    transform: scale(1.05);
-}
-
-a {
-    text-decoration: none;
+/* HOVER */
+.logout-btn:hover img {
+    transform: scale(1.2);
+    filter: brightness(0) invert(1) drop-shadow(0 0 4px rgba(255,255,255,0.6));
 }
