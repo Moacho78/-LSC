@@ -3,7 +3,8 @@ const router = express.Router();
 
 const {
     getPalabraInfo,
-    getEvaluacion
+    getEvaluacion,
+    getPalabras
 } = require("../controllers/palabraController");
 
 const validarJWT = require("../middlewares/authMiddleware");
@@ -15,5 +16,8 @@ router.get("/palabras/:id", validarJWT, getPalabraInfo);
 
 // evaluación
 router.get("/palabras/:id/evaluacion", validarJWT, getEvaluacion);
+
+//Palabras 
+router.get("/palabras",validarJWT,getPalabras);
 
 module.exports = router; 

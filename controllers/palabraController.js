@@ -60,7 +60,30 @@ const getEvaluacion = async (req, res) => {
     }
 };
 
+// GET /palabras
+const getPalabras = async (req, res) => {
+    try {
+        const palabras = await Palabra.find({})
+            .select("_id palabra") // 🔥 solo trae id y nombre
+            .lean();
+
+        res.json({
+            ok: true,
+            total: palabras.length,
+            data: palabras
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            ok: false,
+            msg: "Error al obtener las palabras",
+            error: error.message
+        });
+    }
+};
+
 module.exports = {
     getPalabraInfo,
-    getEvaluacion
+    getEvaluacion,
+    getPalabras
 };
