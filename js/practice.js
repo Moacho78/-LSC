@@ -3,31 +3,117 @@ let questions = [];
 let answers = {};
 let currentQuestionIndex = 0;
 
-/* VIDEO */
-function loadVideo(id) {
+
+async function loadPalabras() {
+    try {
+        const session = JSON.parse(localStorage.getItem("session"));
+
+        const token = session?.token;
+
+        console.log(token);
+
+        const res = await fetch("http://localhost:3000/api/palabra/palabras", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            }
+        });
+
+        const data = await res.json();
+
+        const timeline = document.querySelector(".timeline");
+        timeline.innerHTML = "";
+
+        data.data.forEach((item) => {
+            timeline.innerHTML += `
+                <div class="item">
+                    <div class="circle"></div>
+                    <div class="content" onclick="loadVideo('${item._id}', '${item.palabra}')">
+                        ${item.palabra}
+                    </div>
+                </div>
+            `;
+        });
+
+    } catch (error) {
+        console.error("Error cargando palabras:", error);
+    }
+}
+
+
+
+async function loadVideo(id, palabra) {
     currentVideo = id;
+    const session = JSON.parse(localStorage.getItem("session"));
+    const token = session?.token;
 
     document.getElementById("videoContainer").innerHTML =
-        `<p>Video ${id} cargado</p>`;
+        `<p>Cargando ${palabra}...</p>`;
 
     document.querySelectorAll(".item")
         .forEach(el => el.classList.remove("active"));
 
-    document.querySelectorAll(".item")[id - 1]
-        ?.classList.add("active");
+    // activar el seleccionado
+    event.target.closest(".item").classList.add("active");
 
-    loadQuestions();
+    try {
+
+        const res = await fetch(`http://localhost:3000/api/palabra/palabras/${id}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            }
+        });
+        const data = await res.json();
+
+
+        const videoUrl = data.data.video_referencia;
+        const mp4Url = videoUrl.replace("/upload/", "/upload/f_mp4/");
+
+
+        document.getElementById("videoContainer").innerHTML = `
+    <video controls width="800">
+        <source src="${mp4Url}" type="video/mp4">
+    </video>
+`;
+
+    } catch (error) {
+        console.error("Error cargando video:", error);
+    }
 }
 
 /* PREGUNTAS */
-function loadQuestions() {
-    questions = [
-        { id:"q1", text:"¿Pregunta 1?", options:["A","B","C"], correct:"A"},
-        { id:"q2", text:"¿Pregunta 2?", options:["A","B","C"], correct:"B"},
-        { id:"q3", text:"¿Pregunta 3?", options:["A","B","C"], correct:"C"},
-        { id:"q4", text:"¿Pregunta 4?", options:["A","B","C"], correct:"A"},
-        { id:"q5", text:"¿Pregunta 5?", options:["A","B","C"], correct:"B"}
-    ];
+async function loadQuestions(id) {
+
+    console.log(id);
+    const session = JSON.parse(localStorage.getItem("session"));
+    const token = session?.token;
+
+    try {
+
+        const res = await fetch(`http://localhost:3000/api/palabra/palabras/${id}/evaluacion`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            }
+        });
+        const data = await res.json();
+
+
+        questions = data.data.preguntas;
+        currentQuestionIndex = 0;
+
+        renderQuestion();
+
+
+    } catch (error) {
+        console.error("Error cargando video:", error);
+    }
+
+
 }
 
 /* MODAL */
@@ -40,7 +126,7 @@ function openModal() {
     }
 
     if (questions.length === 0) {
-        loadQuestions();
+        loadQuestions(currentVideo);
     }
 
     const modal = document.getElementById("questionModal");
@@ -66,13 +152,20 @@ function renderQuestion(direction = "next") {
 
     const q = questions[currentQuestionIndex];
 
-    let html = `<div class="question"><p>${q.text}</p>`;
+    let html = `<div class="question"><p>${q.enunciado}</p>`;
 
-    q.options.forEach(opt => {
-        const checked = answers[q.id] === opt ? "checked" : "";
+    q.opciones.forEach((opt, index) => {
+        const checked = answers[currentQuestionIndex] == index ? "checked" : "";
+
         html += `
             <label>
-                <input type="radio" name="${q.id}" value="${opt}" ${checked}>
+                <input 
+                    type="radio" 
+                    name="question_${currentQuestionIndex}" 
+                    value="${index}" 
+                    ${checked}
+                    onchange="saveAnswer(${currentQuestionIndex}, ${index})"
+                >
                 ${opt}
             </label>`;
     });
@@ -89,37 +182,34 @@ function renderQuestion(direction = "next") {
 
     html += `</div>`;
 
-    const anim = direction === "back" ? "fade-slide-back" : "fade-slide";
-
-    form.innerHTML = `<div class="${anim}">${html}</div>`;
+    form.innerHTML = html;
 }
 
 /* NAV */
 function nextQuestion() {
-    saveAnswer();
     currentQuestionIndex++;
     renderQuestion("next");
 }
 
 function prevQuestion() {
-    saveAnswer();
     currentQuestionIndex--;
     renderQuestion("back");
 }
 
 /* GUARDAR */
-function saveAnswer() {
-    const q = questions[currentQuestionIndex];
-    const sel = document.querySelector(`input[name="${q.id}"]:checked`);
-    if (sel) answers[q.id] = sel.value;
+function saveAnswer(questionIndex, optionIndex) {
+    answers[questionIndex] = optionIndex;
 }
 
-/* RESUMEN */
 function showSummary() {
     let html = `<h3>Confirmar respuestas</h3>`;
 
-    questions.forEach(q => {
-        html += `<p>${q.text}: ${answers[q.id] || "No respondida"}</p>`;
+    questions.forEach((q, i) => {
+        const respuesta = answers[i] != null
+            ? q.opciones[answers[i]]
+            : "No respondida";
+
+        html += `<p>${q.enunciado}: ${respuesta}</p>`;
     });
 
     html += `<button type="button" onclick="submitQuiz()">Confirmar</button>`;
@@ -127,22 +217,27 @@ function showSummary() {
     document.getElementById("quizForm").innerHTML = html;
 }
 
-/* RESULTADO */
+// Resultado 
 function submitQuiz() {
     let correct = 0;
-
-    questions.forEach(q => {
-        if (answers[q.id] === q.correct) correct++;
+    console.log(answers);
+    questions.forEach((q, i) => {
+        if (parseInt(answers[i]) + 1 === q.respuesta_correcta) {
+            correct++;
+        }
     });
 
+    console.log(correct);
+
     document.getElementById("scoreDisplay").innerText =
-        `Resultado: ${correct}/5`;
+        `Resultado: ${correct}/${questions.length}`;
 
     closeModal();
 }
 
 /* EVENTO BOTÓN */
 document.addEventListener("DOMContentLoaded", () => {
+    loadPalabras();
     document.getElementById("openQuiz")
         ?.addEventListener("click", openModal);
 });
