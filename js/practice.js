@@ -196,6 +196,11 @@ function prevQuestion() {
     renderQuestion("back");
 }
 
+function goToLastQuestion() {
+    currentQuestionIndex = questions.length - 1;
+    renderQuestion("back");
+}
+
 /* GUARDAR */
 function saveAnswer(questionIndex, optionIndex) {
     answers[questionIndex] = optionIndex;
@@ -220,6 +225,9 @@ function showSummary() {
     html += `
         <button class="summary-btn" type="button" onclick="submitQuiz()">
             Confirmar respuestas
+        </button>
+        <button class="summary-btn" type="button" onclick="goToLastQuestion()">
+            Atras
         </button>
     `;
 
