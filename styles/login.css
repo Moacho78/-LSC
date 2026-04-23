@@ -54,9 +54,10 @@
 /* FORM GROUP */
 .form-group {
     width: 100%;
+    max-width: 320px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     gap: 6px;
 }
 
