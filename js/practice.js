@@ -202,17 +202,26 @@ function saveAnswer(questionIndex, optionIndex) {
 }
 
 function showSummary() {
-    let html = `<h3>Confirmar respuestas</h3>`;
+    let html = `<h3 style="text-align:center;">Confirmar respuestas</h3>`;
 
     questions.forEach((q, i) => {
         const respuesta = answers[i] != null
             ? q.opciones[answers[i]]
             : "No respondida";
 
-        html += `<p>${q.enunciado}: ${respuesta}</p>`;
+        html += `
+            <div class="summary-item">
+                <strong>${q.enunciado}</strong><br>
+                ${respuesta}
+            </div>
+        `;
     });
 
-    html += `<button type="button" onclick="submitQuiz()">Confirmar</button>`;
+    html += `
+        <button class="summary-btn" type="button" onclick="submitQuiz()">
+            Confirmar respuestas
+        </button>
+    `;
 
     document.getElementById("quizForm").innerHTML = html;
 }
@@ -220,17 +229,22 @@ function showSummary() {
 // Resultado 
 function submitQuiz() {
     let correct = 0;
-    console.log(answers);
+
     questions.forEach((q, i) => {
-        if (parseInt(answers[i]) + 1 === q.respuesta_correcta) {
-            correct++;
+        const userAnswer = answers[i];
+
+        if (userAnswer !== undefined && userAnswer !== null) {
+            if ((parseInt(userAnswer) + 1) === q.respuesta_correcta) {
+                correct++;
+            }
         }
     });
 
-    console.log(correct);
+    const score = document.getElementById("scoreDisplay");
 
-    document.getElementById("scoreDisplay").innerText =
-        `Resultado: ${correct}/${questions.length}`;
+    if (score) {
+        score.innerText = `Resultado: ${correct}/${questions.length}`;
+    }
 
     closeModal();
 }

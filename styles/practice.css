@@ -72,8 +72,8 @@
 
 /* VIDEO */
 .video-container {
-    width: 1250px;
-    height: 600px;
+    width: 800px;
+    height: 450px;
     background: #000;
     display: flex;
     justify-content: center;

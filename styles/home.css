@@ -21,7 +21,14 @@
     width: 300px;
     margin-top: 50px;
 }
-
+.btn-main{
+    background-color: #FFD600;
+    padding: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    color: #000;
+}
 /* FEATURES */
 .features {
     display: flex;

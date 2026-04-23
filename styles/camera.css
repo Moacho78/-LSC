@@ -58,11 +58,13 @@
     cursor: pointer;
     border-radius: 6px;
     color: black;
+    font-weight: bold;
 }
 
 .btn.secondary {
     background: #1E88E5;
     color: white;
+    font-weight: bold;
 }
 
 /* 🔥 CARDS (RECUPERADOS) */
