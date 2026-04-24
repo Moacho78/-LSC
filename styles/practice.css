@@ -81,6 +81,7 @@
     color: white;
     margin-bottom: 20px;
     border-radius: 12px;
+    box-shadow: 3px 3px 5px 1px rgba(0, 0, 0, 0.2);
 }
 
 /* ACCIONES */
@@ -99,6 +100,7 @@
     font-weight: bold;
     border-radius: 10px;
     transition: 0.3s;
+    box-shadow: 3px 3px 5px 1px rgba(0, 0, 0, 0.2);
 }
 
 .btn-primary:hover {
@@ -111,6 +113,7 @@
     padding: 10px 15px;
     border-radius: 10px;
     font-weight: 500;
+    box-shadow: 3px 3px 5px 1px rgba(0, 0, 0, 0.2);
 }
 
 /* 🔥 MODAL */
