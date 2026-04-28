@@ -13,6 +13,20 @@ const deptInput = document.getElementById("department");
 const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("password");
 
+/* 🔒 RUTAS PROTEGIDAS */
+function protectRoutes() {
+    const session = localStorage.getItem("session");
+    const currentPage = window.location.pathname.split("/").pop();
+
+    const protectedPages = ["camera.html", "practice.html"];
+
+    if (protectedPages.includes(currentPage) && !session) {
+        window.location.href = "login.html";
+    }
+}
+
+protectRoutes();
+
 toggleLink.addEventListener("click", (e) => {
     e.preventDefault();
 
@@ -63,8 +77,6 @@ mainBtn.addEventListener("click", async () => {
     if (isLogin) {
         try {
 
-            //Logica de inicio de sesion
-
             const response = await fetch("http://localhost:3000/api/usuarios/login", {
                 method: "POST",
                 headers: {
@@ -83,18 +95,19 @@ mainBtn.addEventListener("click", async () => {
                 return;
             }
 
-            // Guardar sesión
             localStorage.setItem("session", JSON.stringify(data));
 
-            window.location.href = "camera.html";
-            //Finaliza logica de inicio de sesion
+            window.location.href = "index.html";
+
         } catch (error) {
             console.error(error);
             alert("Error al conectar con el servidor");
         }
+
     } else {
+
         try {
-            //logica de registro de usuarios
+
             const response = await fetch("http://localhost:3000/api/usuarios/registro", {
                 method: "POST",
                 headers: {
@@ -109,16 +122,14 @@ mainBtn.addEventListener("click", async () => {
             });
 
             const data = await response.json();
-            console.log(data); 
 
             if (!response.ok) {
                 alert(data.msg);
                 return;
             }
 
-            // 🔥 OPCIÓN 2 (si prefieres NO auto login):
-
             isLogin = true;
+
             subtitle.textContent = "Inicio de sesión";
             mainBtn.textContent = "Ingresar";
             toggleText.textContent = "¿No tienes cuenta?";
@@ -126,7 +137,7 @@ mainBtn.addEventListener("click", async () => {
 
             nameGroup.style.display = "none";
             deptGroup.style.display = "none";
-            //cierra logica de registro de usuarios  
+
         } catch (error) {
             console.error(error);
             alert("Error al conectar con el servidor");
@@ -135,10 +146,18 @@ mainBtn.addEventListener("click", async () => {
 
 });
 
+document.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+        e.preventDefault();
+        mainBtn.click();
+    }
+});
+
 window.addEventListener("DOMContentLoaded", () => {
     const session = localStorage.getItem("session");
+    const currentPage = window.location.pathname.split("/").pop();
 
-    if (session) {
-        window.location.href = "camera.html";
+    if (session && currentPage === "login.html") {
+        window.location.href = "index.html";
     }
 });

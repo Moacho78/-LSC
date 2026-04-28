@@ -3,8 +3,7 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-
-    background: linear-gradient(135deg, #1E88E5, #0D47A1);
+    background: linear-gradient(269deg, #1E88E5, #0D47A1);
 }
 
 /* CONTENEDOR */
