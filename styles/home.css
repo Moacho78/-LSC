@@ -1,5 +1,5 @@
 body{
-    background-color: #E3F2FD;
+    background-color: #E3F2FD ;
 }
 
 /* HERO */
@@ -70,16 +70,28 @@ body{
 .features {
     display: flex;
     justify-content: space-around;
+    align-items: stretch;
+    gap: 40px;
+    margin-top: 50px;
     padding: 40px;
     background: #E3F2FD;
+    min-height: 320px;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
 .feature {
     background: #1E88E5;
     color: white;
+    width: 450px;
+    min-height: 160px;
     padding: 20px;
-    border-radius: 10px;
-    width: 250px;
+    border-radius: 80px;
     text-align: center;
-    box-shadow: 0 5px 5px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 8px 8px 5px rgba(0,0,0,0.1);
+    box-sizing: border-box;
 }
