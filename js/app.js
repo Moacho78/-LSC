@@ -191,16 +191,31 @@ holistic.onResults((results) => {
   canvasCtx.drawImage(results.image,0,0,canvasElement.width,canvasElement.height);
 
   if(results.rightHandLandmarks){
-    drawConnectors(canvasCtx, results.rightHandLandmarks, HAND_CONNECTIONS);
-  }
+  drawConnectors(
+    canvasCtx,
+    results.rightHandLandmarks,
+    HAND_CONNECTIONS,
+    { color: "#4FC3F7", lineWidth: 2 }
+  );
+}
 
-  if(results.leftHandLandmarks){
-    drawConnectors(canvasCtx, results.leftHandLandmarks, HAND_CONNECTIONS);
-  }
+if(results.leftHandLandmarks){
+  drawConnectors(
+    canvasCtx,
+    results.leftHandLandmarks,
+    HAND_CONNECTIONS,
+    { color: "#4FC3F7", lineWidth: 2 }
+  );
+}
 
-  if(results.faceLandmarks){
-    drawConnectors(canvasCtx, results.faceLandmarks, FACEMESH_TESSELATION);
-  }
+if(results.faceLandmarks){
+  drawConnectors(
+    canvasCtx,
+    results.faceLandmarks,
+    FACEMESH_TESSELATION,
+    { color: "#81D4FA", lineWidth: 0.5 }
+  );
+}
 
   const rightHand = analyzeHandAdvanced(results.rightHandLandmarks, previousRightHand);
   const leftHand = analyzeHandAdvanced(results.leftHandLandmarks, previousLeftHand);

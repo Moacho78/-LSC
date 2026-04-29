@@ -70,6 +70,20 @@
     align-items: center;
 }
 
+/* TITULO VIDEO */
+.video-title {
+    width: 800px;
+    background: linear-gradient(135deg, #1E88E5, #0D47A1);
+    color: white;
+    padding: 12px 18px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 15px;
+    box-shadow: 3px 3px 5px 1px rgba(0,0,0,0.2);
+}
+
 /* VIDEO */
 .video-container {
     width: 800px;
