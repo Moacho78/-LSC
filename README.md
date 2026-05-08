@@ -173,6 +173,6 @@ Abre el archivo `index.html` directamente en el navegador
 
 # 👥 Autores  
 
--Cecilia Avila Garzon
--Juan Felipe Salmanca Gonzalez
--Miguel Angel Arenas Reyes
+- Cecilia Avila Garzon
+- Juan Felipe Salmanca Gonzalez
+- Miguel Angel Arenas Reyes
