@@ -102,8 +102,8 @@ git --version
 # 📥 Clonar el repositorio  
 
 ```bash
-git clone https://github.com/USUARIO/LSCVision.git
-cd LSCVision
+git clone https://github.com/USUARIO/LSCVision.git](https://github.com/Moacho78/-LSC.git
+cd LSC
 ```
 
 ---
@@ -166,12 +166,7 @@ Abre el archivo `index.html` directamente en el navegador
 ---
 
 # 💾 Funcionalidades Futuras  
-
-- Traducción automática de frases completas en LSC  
-- Implementación de reconocimiento facial y expresiones no manuales  
-- Integración con dispositivos móviles  
-- Módulo de aprendizaje gamificado  
-- Soporte para traducción de voz a señas  
+- Traducción automática de frases completas en LSC   
 - Estadísticas y seguimiento del progreso de aprendizaje  
 
 ---
