@@ -70,24 +70,6 @@ Uso de modelos de visión artificial e inteligencia artificial para mejorar la p
 
 ---
 
-# ⚙️ Requisitos Previos  
-
-Antes de instalar y ejecutar el proyecto, asegúrate de tener instalado:
-
-- Node.js  
-- npm  
-- Git  
-
-Verifica las versiones instaladas con:
-
-```bash
-node -v
-npm -v
-git --version
-```
-
----
-
 # 💻 Instalación y Ejecución  
 
 El proyecto se encuentra dividido en dos partes:
