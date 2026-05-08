@@ -1,4 +1,4 @@
-# 🤟🧠 SEMAK 
+#  SEMAK 
 
 SEMAK es una aplicación web desarrollada con **HTML, CSS, JavaScript, Node.js  Express** enfocada en el reconocimiento y aprendizaje de la **Lengua de Señas Colombiana (LSC)** mediante el análisis de rasgos manuales y tecnologías de visión por computador.  
 
