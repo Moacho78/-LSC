@@ -17,6 +17,10 @@
 .left {
     flex: 2;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;   /* centra verticalmente */
+    align-items: center;       /* centra horizontalmente */
 }
 
 /* DERECHA */
@@ -30,48 +34,56 @@
 /* CAMARA */
 .camera-card {
     position: relative;
+    width: 100%;
     max-width: 700px;
 }
 
 .input_video {
+    margin-top: -50px;
     width: 100%;
     border-radius: 10px;
+    display: block;
 }
 
 .output_canvas {
+    margin-top: -50px;
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
 }
 
-/* 🔥 BOTONES (RECUPERADOS) */
+/* BOTONES */
 .buttons {
     margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
 }
 
 .btn {
     background: #FFD600;
     border: none;
     padding: 10px 20px;
-    margin-right: 10px;
     cursor: pointer;
     border-radius: 6px;
     color: black;
     font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .btn.secondary {
     background: #1E88E5;
     color: white;
     font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-/* 🔥 CARDS (RECUPERADOS) */
 .card {
     background: white;
     padding: 15px;
     margin-bottom: 15px;
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 5px rgba(0,0,0,0.1);
 }

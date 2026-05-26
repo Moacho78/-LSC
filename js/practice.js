@@ -48,6 +48,7 @@ async function loadVideo(id, palabra) {
     const session = JSON.parse(localStorage.getItem("session"));
     const token = session?.token;
 
+    document.getElementById("videoTitle").innerText = palabra;
     document.getElementById("videoContainer").innerHTML =
         `<p>Cargando ${palabra}...</p>`;
 

@@ -21,6 +21,7 @@ body {
     padding: 15px 30px;
     background: #0D47A1;
     color: white;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
 /* NAV */
