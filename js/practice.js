@@ -235,7 +235,7 @@ function showSummary() {
 }
 
 // Resultado 
-function submitQuiz() {
+async function submitQuiz() {
     let correct = 0;
 
     questions.forEach((q, i) => {
@@ -254,7 +254,56 @@ function submitQuiz() {
         score.innerText = `Resultado: ${correct}/${questions.length}`;
     }
 
+    await historial(correct);
+
     closeModal();
+    
+
+}
+
+async function historial(puntaje) {
+
+    const session = JSON.parse(localStorage.getItem("session"));
+    const token = session?.token;
+
+    try {
+
+        // obtener respuestas en texto
+        const respuestas = questions.map((q, i) => {
+            if (answers[i] != null) {
+                return q.opciones[answers[i]];
+            }
+            return "No respondida";
+        });
+
+        // palabra actual
+        const palabraSeleccionada = document.querySelector(".item.active .content")
+            ?.innerText || "Sin palabra";
+
+        const bodyData = {
+            palabra: palabraSeleccionada,
+            puntaje: Number(puntaje),
+            respuestas: respuestas
+        };
+
+        console.log(bodyData)
+
+        const res = await fetch(`http://localhost:3000/api/usuarios/${session.usuario.id}/registros`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify(bodyData)
+        });
+
+        const data = await res.json();
+
+        console.log("Historial guardado:", data);
+
+    } catch (error) {
+        console.error("Error guardando historial:", error);
+    }
 }
 
 /* EVENTO BOTÓN */
