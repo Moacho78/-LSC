@@ -1,5 +1,25 @@
 const mongoose = require("mongoose");
 
+// 🔹 Subdocumento para registros
+const RegistroSchema = new mongoose.Schema({
+  palabra: {
+    type:String,
+    required: true
+  },
+  puntaje: {
+    type: Number,
+    required: true,
+    min: 0
+  },
+  respuestas: [{
+    type: String
+  }],
+  fecha: {
+    type: Date,
+    default: Date.now
+  }
+}, { _id: false });
+
 const UsuarioSchema = new mongoose.Schema({
   nombre: {
     type: String,
@@ -27,6 +47,10 @@ const UsuarioSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true
+  },
+  registros: {
+    type: [RegistroSchema],
+    default: []
   }
 }, {
   timestamps: true

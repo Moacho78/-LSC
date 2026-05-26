@@ -98,3 +98,74 @@ exports.login = async (req, res) => {
   });
 }
 };
+
+// 🔹 Agregar registro
+exports.agregarRegistro = async (req, res) => {
+
+  try {
+
+    const { palabra, puntaje, respuestas } = req.body;
+
+    const usuario = await Usuario.findById(req.params.id);
+
+    if (!usuario) {
+      return res.status(404).json({
+        mensaje: "Usuario no encontrado"
+      });
+    }
+
+    const nuevoRegistro = {
+      palabra,
+      puntaje,
+      respuestas
+    };
+
+    usuario.registros.push(nuevoRegistro);
+
+    await usuario.save();
+
+    res.status(201).json({
+      mensaje: "Registro agregado correctamente",
+      registros: usuario.registros
+    });
+
+  } catch (error) {
+
+    res.status(500).json({
+      mensaje: "Error al agregar registro",
+      error: error.message
+    });
+
+  }
+
+};
+
+// 🔹 Obtener registros
+exports.obtenerRegistros = async (req, res) => {
+
+  try {
+
+    const usuario = await Usuario.findById(req.params.id);
+
+    if (!usuario) {
+      return res.status(404).json({
+        mensaje: "Usuario no encontrado"
+      });
+    }
+
+    res.status(200).json({
+      registros: usuario.registros
+    });
+
+  } catch (error) {
+
+    res.status(500).json({
+      mensaje: "Error al obtener registros",
+      error: error.message
+    });
+
+  }
+
+};
+
+
