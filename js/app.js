@@ -12,7 +12,7 @@ const noManualesDiv = document.getElementById("no-manuales");
 const btnCamara = document.getElementById("btnCamara");
 const btnAnalisis = document.getElementById("btnAnalisis");
 
-// ✅ ESTADO INICIAL (CLAVE)
+// ✅ ESTADO INICIAL
 videoElement.style.display = "none";
 canvasElement.style.display = "none";
 
@@ -85,7 +85,18 @@ function analyzeHandAdvanced(handLandmarks, previousPositionRef){
 
   previousPositionRef.current = {x: wrist.x, y: wrist.y};
 
-  return { configuracion, orientacion, movimiento };
+  // 🔥 NUEVO: detección de pinza
+  const pinchDistance = distance(thumbTip, indexTip);
+  const pinza = pinchDistance < 0.05;
+
+  return { 
+    configuracion, 
+    orientacion, 
+    movimiento,
+    pinza,
+    wrist,
+    indexTip
+  };
 }
 
 // ================= ROSTRO =================
@@ -129,11 +140,52 @@ function analyzeFaceAdvanced(faceLandmarks){
   if(nose.x < chin.x - 0.02) cabeza = "Inclinada derecha";
   if(nose.x > chin.x + 0.02) cabeza = "Inclinada izquierda";
 
-  return { cejas, boca, ojos, cabeza };
+  // 🔥 NUEVO: centro de la boca
+  const mouthCenter = {
+    x: (faceLandmarks[13].x + faceLandmarks[14].x) / 2,
+    y: (faceLandmarks[13].y + faceLandmarks[14].y) / 2
+  };
+
+  return { cejas, boca, ojos, cabeza, mouthCenter };
+}
+
+// ================= DETECCIÓN DE SEÑA =================
+function detectSign(rightHand, leftHand, face){
+
+  if(!rightHand || !face) return null;
+
+  const distToMouth = distance(rightHand.indexTip, face.mouthCenter);
+
+  const manoEnBoca = distToMouth < 0.08;
+  const esPinza = rightHand.pinza;
+
+  let izquierdaValida = false;
+
+  if(!leftHand){
+    izquierdaValida = true;
+  } else {
+    izquierdaValida = leftHand.wrist.y > 0.6;
+  }
+
+  if(manoEnBoca && esPinza && izquierdaValida){
+    return {
+      resultado: "Comer",
+      posibles: ["Hambre", "Trabajar", "Vivir"]
+    };
+  }
+
+  return null;
 }
 
 // ================= DISPLAY =================
-function displayResults(rightHand, leftHand, face){
+function displayResults(rightHand, leftHand, face, detectedSign){
+
+  // 🔥 PRIORIDAD: si detecta seña
+  if(detectedSign){
+    resultadoDiv.innerHTML = `<strong>${detectedSign.resultado}</strong>`;
+    posiblesDiv.innerHTML = detectedSign.posibles.join("<br>");
+    return;
+  }
 
   resultadoDiv.innerHTML = `<strong>${rightHand?.configuracion || leftHand?.configuracion || "Sin detección"}</strong>`;
 
@@ -191,37 +243,24 @@ holistic.onResults((results) => {
   canvasCtx.drawImage(results.image,0,0,canvasElement.width,canvasElement.height);
 
   if(results.rightHandLandmarks){
-  drawConnectors(
-    canvasCtx,
-    results.rightHandLandmarks,
-    HAND_CONNECTIONS,
-    { color: "#4FC3F7", lineWidth: 2 }
-  );
-}
+    drawConnectors(canvasCtx, results.rightHandLandmarks, HAND_CONNECTIONS, { color: "#4FC3F7", lineWidth: 2 });
+  }
 
-if(results.leftHandLandmarks){
-  drawConnectors(
-    canvasCtx,
-    results.leftHandLandmarks,
-    HAND_CONNECTIONS,
-    { color: "#4FC3F7", lineWidth: 2 }
-  );
-}
+  if(results.leftHandLandmarks){
+    drawConnectors(canvasCtx, results.leftHandLandmarks, HAND_CONNECTIONS, { color: "#4FC3F7", lineWidth: 2 });
+  }
 
-if(results.faceLandmarks){
-  drawConnectors(
-    canvasCtx,
-    results.faceLandmarks,
-    FACEMESH_TESSELATION,
-    { color: "#81D4FA", lineWidth: 0.5 }
-  );
-}
+  if(results.faceLandmarks){
+    drawConnectors(canvasCtx, results.faceLandmarks, FACEMESH_TESSELATION, { color: "#81D4FA", lineWidth: 0.5 });
+  }
 
   const rightHand = analyzeHandAdvanced(results.rightHandLandmarks, previousRightHand);
   const leftHand = analyzeHandAdvanced(results.leftHandLandmarks, previousLeftHand);
   const face = analyzeFaceAdvanced(results.faceLandmarks);
 
-  displayResults(rightHand, leftHand, face);
+  const detectedSign = detectSign(rightHand, leftHand, face);
+
+  displayResults(rightHand, leftHand, face, detectedSign);
 });
 
 // ================= CÁMARA =================
@@ -268,7 +307,7 @@ btnAnalisis.addEventListener("click", () => {
 
     analyzing = true;
 
-    canvasElement.style.display = "block"; // 🔥 clave
+    canvasElement.style.display = "block";
     videoElement.style.display = "block";
 
     btnAnalisis.textContent = "Detener análisis";
