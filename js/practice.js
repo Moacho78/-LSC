@@ -243,7 +243,7 @@ async function submitQuiz() {
         const userAnswer = answers[i];
 
         if (userAnswer !== undefined && userAnswer !== null) {
-            if ((parseInt(userAnswer) + 1) === q.respuesta_correcta) {
+            if ((parseInt(userAnswer)) === q.respuesta_correcta) {
                 correct++;
             }
         }
